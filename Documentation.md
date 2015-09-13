@@ -126,7 +126,7 @@ etc
 
 
 ## About
-2_1. Original Idea
+2_1. Original Idea - 
 ASS is an electrical engineering senior design project. It intends improve the method of which autonomous vehicles currently operate.
 
 2_2. Andy - Group Leader and Assistant Coder
