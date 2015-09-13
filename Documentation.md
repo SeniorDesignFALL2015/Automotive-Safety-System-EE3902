@@ -104,16 +104,17 @@ Arduino Leonardo
 
 Zumo Robot:
 * Zumo Robot For Arduino (3) = $100
-* Parallax Ping Ultrasonic Sensor (9) = $12
+* Parallax Ping Ultrasonic Sensor (9) = $30
 * Nylon Accessories = $8.50
 * Acrylic Glass = $9.00
 * Arduino (3) =$20
 * Perforated Soldering Board
 * Female Header Connector
 * Servo
+* Jumper Wire
 
 
-Total = 3*100 + 9*12 + 8.5 + 9 +3*20 = $485.5
+Total = 3*100 + 9*30 + 8.5 + 9 +3*20 
 
 
 1_3_2.
