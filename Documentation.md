@@ -101,11 +101,6 @@ Arduino Leonardo
 * Weight 20g 
 
 
-1_3_1. There are many different 
-Projects within this project are:
--> Line Following
--> Obstacle Avoidance
-->
 
 Zumo Robot:
 * Zumo Robot For Arduino (3) = $100
@@ -143,6 +138,10 @@ ASS is an electrical engineering senior design project. It intends improve the m
 
 ## Assembly and Installation
 
+3_1. There are many different projects within this project are:
+-> Line Following
+-> Obstacle Avoidance
+-> Multiple Position Sensor Interfacing
 
 ## References
 
