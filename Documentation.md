@@ -133,7 +133,7 @@ ASS is an electrical engineering senior design project. It intends improve the m
 
 2_3. Goutam - Business Expert
 
-2_4. Rohan - Group Manager and Coder (documentation)
+2_4. Rohan - Project Manager and Coder (documentation)
 
 2_5. Kristen - R&D and Web Dev (documentation)
 
