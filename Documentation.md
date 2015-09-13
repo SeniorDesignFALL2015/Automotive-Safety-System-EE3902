@@ -65,22 +65,22 @@ Arduino Uno R3:
 * Weight	25 g
 
 A-Star 32U4 Prime
-Microcontroller ATmega32u4 
-Operating Voltage 5V 
-Input Voltage (recommended) 2.7 V to 11.8 V 
-Input Voltage (limits) 6-20V 
-Digital I/O Pins 26
-PWM Channels 7 
-Analog Input Channels 12 
-DC Current per I/O Pin 40 mA 
-DC Current for 3.3V Pin 50 mA 
-Flash Memory 32 KB (ATmega32u4) of which 4 KB used by bootloader 
-SRAM 2.5 KB (ATmega32u4) 
-EEPROM 1 KB (ATmega32u4) 
-Clock Speed 16 MHz 
-Length 68.6 mm 
-Width 53.3 mm 
-Weight 20g 
+* Microcontroller ATmega32u4 
+* Operating Voltage 5V 
+* Input Voltage (recommended) 2.7 V to 11.8 V 
+* Input Voltage (limits) 6-20V 
+* Digital I/O Pins 26
+* PWM Channels 7 
+* Analog Input Channels 12 
+* DC Current per I/O Pin 40 mA 
+* DC Current for 3.3V Pin 50 mA 
+* Flash Memory 32 KB (ATmega32u4) of which 4 KB used by bootloader 
+* SRAM 2.5 KB (ATmega32u4) 
+* EEPROM 1 KB (ATmega32u4) 
+* Clock Speed 16 MHz 
+* Length 68.6 mm 
+* Width 53.3 mm 
+* Weight 22g 
 
 Arduino Leonardo 
 Microcontroller ATmega32u4 
