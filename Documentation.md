@@ -2,12 +2,21 @@
 
 ## Index
 
-- 1_0 Introduction
-  - 1_1. What is ASS?
-  - 1_2. What does ASS do?
-  - 1_3. What does ASS require?
-  - 1_3_1.
-  - 1_3_2.
+- 0_0 Introduction
+  - 0_1. What is ASS?
+  - 0_2. What does ASS do?
+  - 0_3. What does ASS require?
+  
+- 1.0 Hardware, Firmware, and Software
+  - 1_1. Microcontroller
+  - 1_1_1. Arduino UNO
+  - 1_1_2. A-Star Prime
+  - 1_1_3. Leonardo
+  - 1_2. Ultrasonic Sensor
+  - 1_2_1. Parallax Ping)))
+  - 1_2_2. SR04 
+  - 1_2_3. SRF05, SRF06
+  - 1_2_4. DYP-ME007
 
 - 2_0 About
   - 2_1. Original Idea
@@ -15,6 +24,7 @@
   - 2_3. Goutam
   - 2_4. Rohan
   - 2_5. Kristen
+
 
 - 3_0 Assembly and Installation
   - 3_1 Hardware assembly
@@ -24,6 +34,10 @@
   - 3_2_1 Arduino IDE (if its for kids)
   - 3_2_2 Libraries
 
+- 4_0 Usage and Information
+  - 4_1
+  - 4_2
+  - 4_3
 [hardware assembly, 
 [zumo libraries, zumo installation, ping library, ultrasonic senior, arduino uno, materials]  
 
@@ -32,21 +46,23 @@ OR
 AS = Auto Safety
 
 ## Introduction
-1_1. What is ASS?
+0_1. What is ASS?
 
 At relatively high speeds, an autonomous vehicle should able react intelligently. ASS is a safety control system that helps prevent collision for autonomous vehicle on public roadways.
 
-1_2. What does [name] do?
+0_2. What does [name] do?
 
 ASS will prevent auto collisions with safe lane changing capabilities. This project is coded with C in an Arduino IDE, and is meant to prove the concept with smale-scale robotic vehicles.
 
-1_3. What does [name] require?
+0_3. What does [name] require?
 
 ASS requires an microcontroller and ZUMO shield on an robotic vehicle. In addition, this project requires a distance sensor, reflectance sensor, and dual motor drivers. For software uploading, the Arduino IDE will be used.
 
-Microcontrollers can be used with Arduino, A-Star Prime, or Freescale boards.
+# Hardware, Firmware, and Software
 
-Arduino Uno R3:
+Microcontrollers that can be used with the ZUMO shield are Arduino, A-Star Prime, or Freescale boards.
+
+1_1. Arduino Uno R3:
 * Microcontroller	ATmega328P
 * Operating Voltage	5V
 * Input Voltage (recommended)	7-12V
@@ -64,7 +80,7 @@ Arduino Uno R3:
 * Width	53.4 mm
 * Weight	25 g
 
-A-Star 32U4 Prime
+1_2. A-Star 32U4 Prime
 * Microcontroller ATmega32u4 
 * Operating Voltage 5V 
 * Input Voltage (recommended) 2.7 V to 11.8 V 
@@ -82,7 +98,7 @@ A-Star 32U4 Prime
 * Width 53.3 mm 
 * Weight 22g 
 
-Arduino Leonardo 
+1_3. Arduino Leonardo 
 * Microcontroller ATmega32u4 
 * Operating Voltage 5V 
 * Input Voltage (recommended) 7-12V 
@@ -102,7 +118,7 @@ Arduino Leonardo
 
 
 
-Zumo Robot:
+Project Costs:
 * Zumo Robot For Arduino (3) = $100
 * Parallax Ping Ultrasonic Sensor (9) = $30
 * Nylon Accessories = $8.50
