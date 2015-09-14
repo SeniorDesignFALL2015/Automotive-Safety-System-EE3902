@@ -26,6 +26,9 @@
   - 2_2_2. SR04 
   - 2_2_3. SRF05, SRF06
   - 2_2_4. DYP-ME007
+  - 3_1. Libraries
+  - 3_1_1. NewPing
+  - 3_1_2. Zumo Shield
 
 - 3_0 Assembly and Installation
   - 3_1 Hardware assembly
