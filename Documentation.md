@@ -7,24 +7,23 @@
   - 0_2. What does ASS do?
   - 0_3. What does ASS require?
   
-- 1.0 Hardware, Firmware, and Software
-  - 1_1. Microcontroller
-  - 1_1_1. Arduino UNO
-  - 1_1_2. A-Star Prime
-  - 1_1_3. Leonardo
-  - 1_2. Ultrasonic Sensor
-  - 1_2_1. Parallax Ping)))
-  - 1_2_2. SR04 
-  - 1_2_3. SRF05, SRF06
-  - 1_2_4. DYP-ME007
+- 1_0 About
+  - 1_1. Original Idea
+  - 1_2. Andy
+  - 1_3. Goutam
+  - 1_4. Rohan
+  - 1_5. Kristen
 
-- 2_0 About
-  - 2_1. Original Idea
-  - 2_2. Andy
-  - 2_3. Goutam
-  - 2_4. Rohan
-  - 2_5. Kristen
-
+- 2.0 Hardware, Firmware, and Software
+  - 2_1. Microcontroller
+  - 2_1_1. Arduino UNO
+  - 2_1_2. A-Star Prime
+  - 2_1_3. Leonardo
+  - 2_2. Ultrasonic Sensor
+  - 2_2_1. Parallax Ping)))
+  - 2_2_2. SR04 
+  - 2_2_3. SRF05, SRF06
+  - 2_2_4. DYP-ME007
 
 - 3_0 Assembly and Installation
   - 3_1 Hardware assembly
@@ -58,11 +57,34 @@ ASS will prevent auto collisions with safe lane changing capabilities. This proj
 
 ASS requires an microcontroller and ZUMO shield on an robotic vehicle. In addition, this project requires a distance sensor, reflectance sensor, and dual motor drivers. For software uploading, the Arduino IDE will be used.
 
+
+
+1_3_2.
+etc
+[possible models and brief intro; classification; specs and features; summary]
+
+1_4. 
+[questions and answers and where to contact]
+
+
+## About
+1_1. Original Idea - 
+ASS is an electrical engineering senior design project. It intends improve the method of which autonomous vehicles currently operate.
+
+1_2. Andy - Group Leader and Assistant Coder
+
+1_3. Goutam - Business Expert
+
+1_4. Rohan - Project Manager and Coder (documentation)
+
+1_5. Kristen - R&D and Web Dev (documentation)
+
 # Hardware, Firmware, and Software
+2_1 Microcontrollers
 
 Microcontrollers that can be used with the ZUMO shield are Arduino, A-Star Prime, or Freescale boards.
 
-1_1. Arduino Uno R3:
+2_2_1.. Arduino Uno R3:
 * Microcontroller	ATmega328P
 * Operating Voltage	5V
 * Input Voltage (recommended)	7-12V
@@ -80,7 +102,7 @@ Microcontrollers that can be used with the ZUMO shield are Arduino, A-Star Prime
 * Width	53.4 mm
 * Weight	25 g
 
-1_2. A-Star 32U4 Prime
+2_2_2. A-Star 32U4 Prime
 * Microcontroller ATmega32u4 
 * Operating Voltage 5V 
 * Input Voltage (recommended) 2.7 V to 11.8 V 
@@ -98,7 +120,7 @@ Microcontrollers that can be used with the ZUMO shield are Arduino, A-Star Prime
 * Width 53.3 mm 
 * Weight 22g 
 
-1_3. Arduino Leonardo 
+2_2_3. Arduino Leonardo 
 * Microcontroller ATmega32u4 
 * Operating Voltage 5V 
 * Input Voltage (recommended) 7-12V 
@@ -132,26 +154,6 @@ Project Costs:
 
 Total = 3*100 + 9*30 + 8.5 + 9 +3*20 
 
-
-1_3_2.
-etc
-[possible models and brief intro; classification; specs and features; summary]
-
-1_4. 
-[questions and answers and where to contact]
-
-
-## About
-2_1. Original Idea - 
-ASS is an electrical engineering senior design project. It intends improve the method of which autonomous vehicles currently operate.
-
-2_2. Andy - Group Leader and Assistant Coder
-
-2_3. Goutam - Business Expert
-
-2_4. Rohan - Project Manager and Coder (documentation)
-
-2_5. Kristen - R&D and Web Dev (documentation)
 
 ## Assembly and Installation
 
