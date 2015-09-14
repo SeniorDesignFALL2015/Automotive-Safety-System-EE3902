@@ -49,11 +49,11 @@ AS = Auto Safety
 
 At relatively high speeds, an autonomous vehicle should able react intelligently. ASS is a safety control system that helps prevent collision for autonomous vehicle on public roadways.
 
-0_2. What does [name] do?
+0_2. What does ASS do?
 
 ASS will prevent auto collisions with safe lane changing capabilities. This project is coded with C in an Arduino IDE, and is meant to prove the concept with smale-scale robotic vehicles.
 
-0_3. What does [name] require?
+0_3. What does ASS require?
 
 ASS requires an microcontroller and ZUMO shield on an robotic vehicle. In addition, this project requires a distance sensor, reflectance sensor, and dual motor drivers. For software uploading, the Arduino IDE will be used.
 
