@@ -6,6 +6,8 @@
   - 0_1. What is ASS?
   - 0_2. What does ASS do?
   - 0_3. What does ASS require?
+  - 0_4. Contant information
+  - 0_5. Questions & Answers
   
 - 1_0 About
   - 1_1. Original Idea
@@ -57,14 +59,11 @@ ASS will prevent auto collisions with safe lane changing capabilities. This proj
 
 ASS requires an microcontroller and ZUMO shield on an robotic vehicle. In addition, this project requires a distance sensor, reflectance sensor, and dual motor drivers. For software uploading, the Arduino IDE will be used.
 
+0_4. Contant information
+
+0_5. Questions & Answers
 
 
-1_3_2.
-etc
-[possible models and brief intro; classification; specs and features; summary]
-
-1_4. 
-[questions and answers and where to contact]
 
 
 ## About
