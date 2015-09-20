@@ -28,7 +28,7 @@
   - 2_2_4. DYP-ME007
   - 3_1. Libraries
   - 3_1_1. NewPing
-  - 3_1_2. Zumo Shield
+  - 3_1_2. ZumoShieldLibraries
 
 - 3_0 Assembly and Installation
   - 3_1 Hardware assembly
