@@ -58,7 +58,8 @@ HASS will prevent auto collisions with safe lane changing capabilities. This pro
 
 HASS requires an microcontroller and ZUMO shield on an robotic vehicle. In addition, this project requires a distance sensor, reflectance sensor, and dual motor drivers. For software uploading, the Arduino IDE will be used.
 
-0_4. Contant information
+
+0_4. Contact information
 
 0_5. Questions & Answers
 
@@ -161,6 +162,17 @@ Total = 3($100) + 9($30) + $8.5 + $9 +3($20)
 -> Multiple Position Sensor Interfacing
 
 ## References
+## Scope of Work
+
+The ideas and steps that were taken in to account in order to build HASS were complex and dependent of each other. The testing process followed a specific order of checkpoints that were required to meet in order to have everything working as expected. 
+
+1. Getting the Zumo robot to properly line follow.
+2. Installing ultrasonic sensors on Zumo for object detection and avoidance along with the continuation of line following.
+3. Once Zumo is line following and the sensors are installed, Zumo will be able to detect a similar vehicle traveling at a slower rate of speed in the same direction and adjust its speed in order to travel at a safe distance. 
+4. Once Zumo has adjusted to a safe distance, sensors will engauge on the left lane of the road and detect any other vehicles or object. From here Zumo sensors will determine weather or not enough time and speed is available in order to safely overtake the vehicle traveling in front of Zumo. 
+5. If the sensors detects a vehicle or object, stay in lane and continue traveling behind the vehicle.
+6. If no object is detected Zumo will change lanes, the motors will increase speeds, and the sensor will determine when changing back to the right lane without a collision is possible. 
+7. Once a safe distance is reached, Zumo will change back to the right lane and continue to follow the line.
 
 
 
