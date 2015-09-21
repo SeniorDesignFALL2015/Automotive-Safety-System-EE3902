@@ -18,21 +18,21 @@
 
 - 2.0 Hardware, Firmware, and Software
   - 2_1. Microcontroller
-  - 2_1_1. Arduino UNO
-  - 2_1_2. A-Star Prime
-  - 2_1_3. Leonardo
+      - 2_1_1. Arduino UNO
+      - 2_1_2. A-Star Prime
+      - 2_1_3. Leonardo
   - 2_2. Ultrasonic Sensor
-  - 2_2_1. Parallax Ping)))
-  - 2_2_2. SR04 
-  - 2_2_3. SRF05, SRF06
-  - 2_2_4. DYP-ME007
+      - 2_2_1. Parallax Ping)))
+      - 2_2_2. SR04 
+      - 2_2_3. SRF05, SRF06
+      - 2_2_4. DYP-ME007
   - 3_1. Libraries
-  - 3_1_1. NewPing
-  - 3_1_2. ZumoShieldLibraries
+     - 3_1_1. NewPing
+     - 3_1_2. ZumoShieldLibraries
 
 - 3_0 Assembly and Installation
-  - 3_1 Hardware assembly
-  - 3_1_1 Zumo configuration
+    - 3_1 Hardware assembly
+    - 3_1_1 Zumo configuration
   - 3_1_2 Additional parts
   - 3_2 Software installation
   - 3_2_1 Arduino IDE (if its for kids)
