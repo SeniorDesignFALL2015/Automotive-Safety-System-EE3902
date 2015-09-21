@@ -154,7 +154,7 @@ Project Costs:
 * Jumper Wire
 
 
-Total = 3(100) + 9(30) + 8.5 + 9 +3(20) 
+Total = 3($100) + 9($30) + $8.5 + $9 +3($20) 
 
 
 ## Assembly and Installation
