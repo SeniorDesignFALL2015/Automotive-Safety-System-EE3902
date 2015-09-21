@@ -1,11 +1,11 @@
-# Automotive-Safety-System-EE3902
+# Highspeed-Automotive-Safety-System-EE3902
 
 ## Index
 
 - 0_0 Introduction
-  - 0_1. What is ASS?
-  - 0_2. What does ASS do?
-  - 0_3. What does ASS require?
+  - 0_1. What is HASS?
+  - 0_2. What does HASS do?
+  - 0_3. What does HASS require?
   - 0_4. Contant information
   - 0_5. Questions & Answers
   
@@ -45,22 +45,18 @@
 [hardware assembly, 
 [zumo libraries, zumo installation, ping library, ultrasonic senior, arduino uno, materials]  
 
-ASS = Automotive Safety System
-OR
-AS = Auto Safety
-
 ## Introduction
-0_1. What is ASS?
+0_1. What is HASS?
 
-At relatively high speeds, an autonomous vehicle should able react intelligently. ASS is a safety control system that helps prevent collision for autonomous vehicle on public roadways.
+At relatively high speeds, an autonomous vehicle should able to react intelligently. HASS is a safety control system that helps prevent collisions for autonomous vehicles on public roadways.
 
-0_2. What does ASS do?
+0_2. What does HASS do?
 
-ASS will prevent auto collisions with safe lane changing capabilities. This project is coded with C in an Arduino IDE, and is meant to prove the concept with smale-scale robotic vehicles.
+HASS will prevent auto collisions with safe lane changing capabilities. This project is coded with C in an Arduino IDE, and is meant to prove the concept with smale-scale robotic vehicles.
 
-0_3. What does ASS require?
+0_3. What does HASS require?
 
-ASS requires an microcontroller and ZUMO shield on an robotic vehicle. In addition, this project requires a distance sensor, reflectance sensor, and dual motor drivers. For software uploading, the Arduino IDE will be used.
+HASS requires an microcontroller and ZUMO shield on an robotic vehicle. In addition, this project requires a distance sensor, reflectance sensor, and dual motor drivers. For software uploading, the Arduino IDE will be used.
 
 0_4. Contant information
 
@@ -71,7 +67,7 @@ ASS requires an microcontroller and ZUMO shield on an robotic vehicle. In additi
 
 ## About
 1_1. Original Idea - 
-ASS is an electrical engineering senior design project. It intends improve the method of which autonomous vehicles currently operate.
+HASS is an electrical engineering senior design project. It intends improve the method of which autonomous vehicles currently operate.
 
 1_2. Andy - Group Leader and Assistant Coder
 
