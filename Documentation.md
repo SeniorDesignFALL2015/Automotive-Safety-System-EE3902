@@ -31,12 +31,12 @@
      - 3_1_2. ZumoShieldLibraries
 
 - 3_0 Assembly and Installation
-    - 3_1 Hardware assembly
+  - 3_1 Hardware assembly
     - 3_1_1 Zumo configuration
-  - 3_1_2 Additional parts
+    - 3_1_2 Additional parts
   - 3_2 Software installation
-  - 3_2_1 Arduino IDE (if its for kids)
-  - 3_2_2 Libraries
+    - 3_2_1 Arduino IDE (if its for kids)
+    - 3_2_2 Libraries
 
 - 4_0 Usage and Information
   - 4_1
