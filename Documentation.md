@@ -1,4 +1,4 @@
-# Automotive-Speed coordination (ASC)
+# Automotic-Speed coordination (ASC)
 
 ## Index
 
