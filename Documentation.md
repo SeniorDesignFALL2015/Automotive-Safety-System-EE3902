@@ -145,6 +145,19 @@ Project Costs:
 * Nylon Accessories = $8.50
 * Acrylic Glass = $9.00
 * Arduino (3) =$20
+* Parallax ping Ultrasonic Range Sensor28015 = $32.99
+* Zumo Robert for Arduino,v1.2 (2) = $210.80
+* premium Jumper Wire 10-pack F-F 3*Black = $2.85
+* Parallax PING Ultrasonic Sensor#28015 = $29.99
+* 0.100"(2.54mm) Female Header:1*3-pin, Straight=$6.80
+* Adafruit Perma-Proto Quater-Sized Breadboard PCB(3-Pack)= 17.90
+* Wire with Pre-crimped Terminals 50-Piece Rainbow Assortment M-M 3"=$8.95
+* 170-Point Breadboard(White)=$5.90
+* 100.1 Micro Metal Gearmotor HP with Extended Motor Shaft =$33.90
+* 0.100"(2.54mm)Female Header:1*2-Pin, Straight =$2.90
+* Magnatic Encoder Pair Kit for Micro Metal Gearmotors,12 CRP,2.7-18V =$8.95
+* 
+* 
 * Perforated Soldering Board
 * Female Header Connector
 * Servo
