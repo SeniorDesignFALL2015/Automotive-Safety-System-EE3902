@@ -15,15 +15,11 @@
 #include <ZumoReflectanceSensorArray.h>
 #include <ZumoMotors.h>
 #include <Pushbutton.h>
-#include <Servo.h>
 
 
-
-
-
-#define TRIGGER_PIN  6  // Arduino pin tied to trigger pin on the ultrasonic sensor.
-#define ECHO_PIN     6  // Arduino pin tied to echo pin on the ultrasonic sensor.
-#define MAX_DISTANCE 500 // Maximum distance we want to ping for (in centimeters). Maximum sensor distance is rated at 400-500cm.
+#define SONAR_NUM     1 // Number of sensors.
+#define MAX_DISTANCE 200 // Maximum distance (in cm) to ping.
+#define PING_INTERVAL 500 // Milliseconds between sensor pings (29ms is about the min to avoid cross-sensor echo).
 
 
 ZumoReflectanceSensorArray reflectanceSensors;
@@ -32,10 +28,13 @@ Pushbutton button(ZUMO_BUTTON);
 int lastError = 0;
 int line_pos = 0;
 const int MAX_SPEED = 300;
+unsigned long pingTimer[SONAR_NUM]; // Holds the times when the next ping should happen for each sensor.
+unsigned int cm[SONAR_NUM];         // Where the ping distances are stored.
+uint8_t currentSensor = 0;          // Keeps track of which sensor is active.
 
-
-NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE); // NewPing setup of pins and maximum distance.
-
+NewPing sonar[SONAR_NUM] = {     // Sensor object array.
+  NewPing(6, 6, MAX_DISTANCE), // Each sensor's trigger pin, echo pin, and max distance to ping.
+};
 
 void setup() {
 
@@ -61,11 +60,23 @@ void setup() {
   button.waitForButton();
   
   Serial.begin(9600);    // start serial communication at 9600 baud
-    
+  pingTimer[0] = millis() + 75;           // First ping starts at 75ms, gives time for the Arduino to chill before starting.
+  for (uint8_t i = 1; i < SONAR_NUM; i++) // Set the starting time for each sensor.
+    pingTimer[i] = pingTimer[i - 1] + PING_INTERVAL; 
 }
 
 void loop() {
-      
+  for (uint8_t i = 0; i < SONAR_NUM; i++) { // Loop through all the sensors.
+    if (millis() >= pingTimer[i]) {         // Is it this sensor's time to ping?
+      pingTimer[i] += PING_INTERVAL * SONAR_NUM;  // Set next time this sensor will be pinged.
+      if (i == 0 && currentSensor == SONAR_NUM - 1)
+      oneSensorCycle(); // Sensor ping cycle complete, do something with the results.
+      sonar[currentSensor].timer_stop();          // Make sure previous timer is canceled before starting a new ping (insurance).
+      currentSensor = i;                          // Sensor being accessed.
+      cm[currentSensor] = 0;                      // Make distance zero in case there's no ping echo for this sensor.
+      sonar[currentSensor].ping_timer(echoCheck); // Do the ping (processing continues, interrupt will call echoCheck to look for echo).
+    }
+  }    
   unsigned int sensors[6];
   int position = reflectanceSensors.readLine(sensors);
   int error = position - 2500;
@@ -82,20 +93,32 @@ void loop() {
   if (m2Speed > MAX_SPEED)
     m2Speed = MAX_SPEED;
      motors.setSpeeds(m1Speed, m2Speed);
-     
-    int inches = sonar.ping_in() ;  // where is everything?
-    int cm = sonar.ping_cm();;
-    int mseconds = sonar.ping();
     
-     if (inches < 10 && inches >1 ){
+     if (cm[0] < 30 && cm[0] >1 ){
         motors.setSpeeds(0, 0);
+        delay(20);
      }
 
   
   // Other code that *DOESN'T* analyze ping results can go here.
 }
 
+void echoCheck() { // If ping received, set the sensor distance to array.
+  if (sonar[currentSensor].check_timer())
+    cm[currentSensor] = sonar[currentSensor].ping_result / US_ROUNDTRIP_CM;
+}
 
+void oneSensorCycle() { // Sensor ping cycle complete, do something with the results.
+  // The following code would be replaced with your code that does something with the ping results.
+
+  for (uint8_t i = 0; i < SONAR_NUM; i++) {
+    Serial.print(i);
+    Serial.print("=");
+    Serial.print(cm[i]);
+    Serial.print("cm ");
+  }
+  Serial.println();
+}
 void restlinepos(){
   if(line_pos == 1){
     line_pos == 0;
@@ -150,3 +173,4 @@ void stop()//stop both motors
      motors.setRightSpeed(0);
      
 }
+
