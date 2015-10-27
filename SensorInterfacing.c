@@ -4,7 +4,6 @@
 #define SONAR_NUM     2 // Number or sensors.
 #define MAX_DISTANCE 200 // Max distance in cm.
 #define PING_INTERVAL 200 // Milliseconds between pings.
-byte incomingByte = 0; 
 unsigned long pingTimer[SONAR_NUM]; // When each pings.
 unsigned int cm[SONAR_NUM]; // Store ping distances.
 uint8_t currentSensor = 0; // Which sensor is active.
