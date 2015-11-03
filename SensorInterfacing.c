@@ -1,71 +1,161 @@
-#include <NewPing.h>
-
-
-#define SONAR_NUM     2 // Number or sensors.
-#define MAX_DISTANCE 200 // Max distance in cm.
-#define PING_INTERVAL 200 // Milliseconds between pings.
-unsigned long pingTimer[SONAR_NUM]; // When each pings.
-unsigned int cm[SONAR_NUM]; // Store ping distances.
-uint8_t currentSensor = 0; // Which sensor is active.
+#include <ZumoMotors.h>
+#include <QTRSensors.h>
+#include <ZumoReflectanceSensorArray.h>
+#include <ZumoMotors.h>
+#include <Pushbutton.h>
+#include <ZumoBuzzer.h>
+#include <avr/io.h>
+#include <avr/interrupt.h>
+ZumoBuzzer buzzer;
  
-NewPing sonar[SONAR_NUM] = { // Sensor object array.
-  NewPing(3, 3, MAX_DISTANCE),
-  NewPing(4, 4, MAX_DISTANCE),
- };
+ 
+ 
+ZumoReflectanceSensorArray reflectanceSensors;
+ZumoMotors motors;
+Pushbutton button(ZUMO_BUTTON);
+int lastError = 0;
+const int MAX_SPEED = 300;
+byte c;
+int count = 0;
+char flag1, flag2, flag3;
 void setup() {
-  pinMode(7, OUTPUT);
-  pinMode(8, OUTPUT);
   Serial.begin(9600);
-  pingTimer[0] = millis() + 75;           // First ping starts at 75ms, gives time for the Arduino to chill before starting.
-  for (uint8_t i = 1; i < SONAR_NUM; i++) // Set the starting time for each sensor.
-    pingTimer[i] = pingTimer[i - 1] + PING_INTERVAL;
-}
-void loop() {
-  for (uint8_t i = 0; i < SONAR_NUM; i++) { // Loop through all the sensors.
-     if (millis() >= pingTimer[i]) {         // Is it this sensor's time to ping?
-      pingTimer[i] += PING_INTERVAL * SONAR_NUM;  // Set next time this sensor will be pinged.
-      if (i == 0 && currentSensor == SONAR_NUM - 1) oneSensorCycle(); // Sensor ping cycle complete, do something with the results.
-      sonar[currentSensor].timer_stop();          // Make sure previous timer is canceled before starting a new ping (insurance).
-      currentSensor = i;                          // Sensor being accessed.
-      cm[currentSensor] = 0;                      // Make distance zero in case there's no ping echo for this sensor.
-      sonar[currentSensor].ping_timer(echoCheck); // Do the ping (processing continues, interrupt will call echoCheck to look for echo).
-     }
+  button.waitForButton();
+ 
+  reflectanceSensors.init();
+   delay(1000);
+  int i;
+  for(i = 0; i < 80; i++)
+  {
+    if ((i > 10 && i <= 30) || (i > 50 && i <= 70))
+      motors.setSpeeds(-200, 200);
+    else
+      motors.setSpeeds(200, -200);
+      reflectanceSensors.calibrate();
+    // Since our counter runs to 80, the total delay will be
+    // 80*20 = 1600 ms.
+    delay(20);
   }
-  // Other code that *DOESN'T* analyze ping results can go here.
+  motors.setSpeeds(0,0);
+  button.waitForButton();
+  flag1 = 0;
+  flag2 = 0;
+  flag3 = 0;
+ 
 }
-void echoCheck() { // If ping received, set the sensor distance to array.
-  if (sonar[currentSensor].check_timer())
-    cm[currentSensor] = sonar[currentSensor].ping_result / US_ROUNDTRIP_CM;
-}
+ 
+ 
+void loop() {
+ 
+   while (Serial.available()) {
+      delay(10);  //small delay to allow input buffer to fill
+ 
+      c = Serial.read();  //gets one byte from serial buffer
+     
+      Serial.print(c);
+     } //makes the string readString
+       
+      // if (count = 0){
+       if (c == 0 && flag1 == 0 ){   // NF, NS and on right lane
+       
+          linefollow();     
+       }
+      else if(c == 240 && flag1 == 0 ){
+        
+         flag1 = 1;
+         changeleftlane();       // change left lane
+         slow();
+         linefollow();
+        }  
+//     else if(c == 0 && flag1 == 1 && flag2 == 0){
+//      linefollow();
+//     }
+    else if(c == 12 && flag1 == 1 && flag2 == 0){
+      flag2 = 1;
+      linefollow();
+     }
+     else if(c == 0 && flag1 == 1 && flag2 == 1){
+       flag3 = 1;
+       flag2 = 0;
+       linefollow();
+     }
+    else if(c == 0 && flag1 == 1 && flag3 == 1){
+      flag3 = 0;
+      flag1=0;
+      flag2 = 0;
+      changerightlane();       // change left lane
+      slow();
+      linefollow();
+     }
+     else{
+     linefollow();
 
-byte x = 0x00;
-void oneSensorCycle() { // Sensor ping cycle complete,
-//do something with the ping results.
-if( cm[0] < 35 && cm[0] > 3 && cm[1] < 15 && cm[1] > 3){
-    x |= 0xFF;
-   Serial.write(0xFF);
+     }
+     //  }
+       
+  // else if(count=1){
+ 
 }
-else if( cm[0] > 35 && cm[1] < 15 && cm[1] > 3){
-   x &= 0x0C;
-   x |= 0x0C;
-   Serial.write(x);
+    
+    
+ void slowlinefollow(){
+const int SLOW_SPEED = 100;
+  unsigned int sensors[6];
+  int position = reflectanceSensors.readLine(sensors);
+  int error = position - 1000;
+int speedDifference = error / 4 + 6 * (error - lastError);
+lastError = error;
+   int m1Speed = SLOW_SPEED + speedDifference;
+  int m2Speed = SLOW_SPEED - speedDifference;
+if (m1Speed < 0)
+    m1Speed = 0;
+  if (m2Speed < 0)
+    m2Speed = 0;
+  if (m1Speed > SLOW_SPEED)
+    m1Speed = SLOW_SPEED;
+  if (m2Speed > SLOW_SPEED)
+    m2Speed = SLOW_SPEED;
+    motors.setSpeeds(m1Speed, m2Speed);
 }
-else if( cm[0] < 35 && cm[0] > 3 && cm[1] > 15){
-   x &= 0xF0;
-   x |= 0xF0;
-   Serial.write(0xF0);
+ 
+void linefollow()//
+{// turns on drive motor in reverse and leaves it on
+    unsigned int sensors[6];
+  int position = reflectanceSensors.readLine(sensors);
+  int error = position - 2500;
+int speedDifference = error / 4 + 6 * (error - lastError);
+lastError = error;
+   int m1Speed = MAX_SPEED + speedDifference;
+  int m2Speed = MAX_SPEED - speedDifference;
+if (m1Speed < 0)
+    m1Speed = 0;
+  if (m2Speed < 0)
+    m2Speed = 0;
+  if (m1Speed > MAX_SPEED)
+    m1Speed = MAX_SPEED;
+  if (m2Speed > MAX_SPEED)
+    m2Speed = MAX_SPEED;
+     motors.setSpeeds(m1Speed, m2Speed);
 }
-else if( cm[0] > 35  && cm[1] > 15){
-  x &= 0x00;    
-  Serial.write(0x00);
+ 
+void changeleftlane(){
+     motors.setLeftSpeed(50);
+     motors.setRightSpeed(200);
+     delay(500);
 }
-
-//     Serial.println(4);
-//Serial.println(cm[0]);
-//Serial.print(cm[0]);
-//Serial.print(' ');
-//Serial.print(cm[1]);
-//Serial.println();
+void changerightlane(){
+     motors.setLeftSpeed(200);
+     motors.setRightSpeed(50);
+     delay(500);
 }
-
-
+void stop()//stop both motors
+{
+     motors.setLeftSpeed(0);
+     motors.setRightSpeed(0);
+}
+void slow()
+{
+   motors.setLeftSpeed(200);
+   motors.setRightSpeed(200);
+   delay(400);
+}
