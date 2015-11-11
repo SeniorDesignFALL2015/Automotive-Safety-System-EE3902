@@ -1,4 +1,3 @@
-
 #include <ZumoMotors.h>
 #include <QTRSensors.h>
 #include <ZumoReflectanceSensorArray.h>
@@ -8,21 +7,21 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 ZumoBuzzer buzzer;
-
-
-
+ 
+ 
+ 
 ZumoReflectanceSensorArray reflectanceSensors;
 ZumoMotors motors;
 Pushbutton button(ZUMO_BUTTON);
 int lastError = 0;
-const int MAX_SPEED = 300;
+const int MAX_SPEED = 400;
 byte c;
-int count = 0;
-
+char flag1, flag2, flag3, flag4;
+double count;
 void setup() {
   Serial.begin(9600);
   button.waitForButton();
-
+ 
   reflectanceSensors.init();
    delay(1000);
   int i;
@@ -39,76 +38,100 @@ void setup() {
   }
   motors.setSpeeds(0,0);
   button.waitForButton();
-  
-   
+  flag1 = 0;
+  flag2 = 0;
+  flag3 = 0;
+  flag4 = 1;
+  count=0;
  
 }
-
-
+ 
+ 
 void loop() {
-  
+ 
    while (Serial.available()) {
       delay(10);  //small delay to allow input buffer to fill
-
+ 
       c = Serial.read();  //gets one byte from serial buffer
-      
+     
       Serial.print(c);
-     } //makes the string readString 
+     } 
        
-       if (c == 0 ){   // nothing detected
-          linefollow();      
+       if(flag4==1){
+       if (c == 0 && flag1 == 0 ){   // NF, NS and on right lane
+          linefollow();  
+          count=0;   
        }
-      else if(c == 240 ){
+      else if(c == 240 && flag1 == 0 ){ // SF, NS
+         buzzer.play(">g32>>b32");
+         flag1 = 1;
          changeleftlane();       // change left lane
          slow();
          linefollow();
-        }   
-        
-     if (c == 160){   // nothing detected
-          linefollow();      
-       }
-      else if(c == 12 ){
-         changerightlane();       // change right lane
-         slow();
-         linefollow();
-        }   
-     
-// Use a count method?
-//  if(count == 0){
-//  if (c == 0 || c==12){   // nothing detected
-//          linefollow();      
-//       }
-//      else if(c == 240 ){
-//         changeleftlane();       // change left lane
-//         slow();
-//         linefollow();
-//        } 
-//        count = 1;
-//  }
-//  else if( count == 1 ){   
-//     if (c == 0 || c==240){   // nothing detected
-//          linefollow();      
-//       }
-//      else if(c == 12 ){
-//         changerightlane();       // change left lane
-//         slow();
-//         linefollow();
-//        }   
-//        count = 0;
-//  }
-
+        }  
+//     else if(c == 160 && flag1 == 1 && flag2==0){
+//      flag1=1;
+//      flag2=1; 
+//      linefollow();
+//     }
+      else if(c == 240 && flag1 == 1 ){ // SF, NS
+         buzzer.play(">g32>>b32");
+         flag4=0;
+        changerightlane();       // change left lane
+        slow();
+        linefollow();
+        }  
+    else if(c == 12 && flag1 == 1 && flag2 == 0){ // NF, SS
+      flag2 = 1;
+      linefollow();
+     }
+     else if(c == 0 && flag1 == 1 && flag2 == 1){
+       flag3 = 1;
+       flag2 = 0;
+       linefollow();
+     }
+    else if(c == 0 && flag1 == 1 && flag3 == 1 ){
+      flag3 = 0;
+      flag1=0;
+      flag2 = 0;
+      changerightlane();       // change left lane
+      slow();
+      linefollow();
+     }
+     else{
+     linefollow();
+     }
+      }
+     else if(flag4==0){
        
+      flag3 = 0;
+      flag1=0;
+      flag2 = 0;
+      count++;
+      if(count==1600000){
+     slowlinefollow();
+      }
+     else{
+    flag4=1; 
+     count=0;
+      }
+      
+     }
+     
+ 
 }
+    
+    
  void slowlinefollow(){
-const int SLOW_SPEED = 100;
+const int SLOW_SPEED = 200;
   unsigned int sensors[6];
   int position = reflectanceSensors.readLine(sensors);
   int error = position - 1000;
- int speedDifference = error / 4 + 6 * (error - lastError);
- lastError = error;
+int speedDifference = error / 4 + 6 * (error - lastError);
+lastError = error;
    int m1Speed = SLOW_SPEED + speedDifference;
   int m2Speed = SLOW_SPEED - speedDifference;
- if (m1Speed < 0)
+if (m1Speed < 0)
     m1Speed = 0;
   if (m2Speed < 0)
     m2Speed = 0;
@@ -118,17 +141,17 @@ const int SLOW_SPEED = 100;
     m2Speed = SLOW_SPEED;
     motors.setSpeeds(m1Speed, m2Speed);
 }
-
+ 
 void linefollow()//
 {// turns on drive motor in reverse and leaves it on
     unsigned int sensors[6];
   int position = reflectanceSensors.readLine(sensors);
   int error = position - 2500;
- int speedDifference = error / 4 + 6 * (error - lastError);
- lastError = error;
+int speedDifference = error / 4 + 6 * (error - lastError);
+lastError = error;
    int m1Speed = MAX_SPEED + speedDifference;
   int m2Speed = MAX_SPEED - speedDifference;
- if (m1Speed < 0)
+if (m1Speed < 0)
     m1Speed = 0;
   if (m2Speed < 0)
     m2Speed = 0;
@@ -138,26 +161,25 @@ void linefollow()//
     m2Speed = MAX_SPEED;
      motors.setSpeeds(m1Speed, m2Speed);
 }
-
+ 
 void changeleftlane(){
      motors.setLeftSpeed(50);
-     motors.setRightSpeed(200); 
+     motors.setRightSpeed(200);
      delay(500);
 }
 void changerightlane(){
      motors.setLeftSpeed(200);
-     motors.setRightSpeed(50); 
+     motors.setRightSpeed(50);
      delay(500);
 }
-void stop()//stop both motors
+void stopm()//stop both motors
 {
      motors.setLeftSpeed(0);
-     motors.setRightSpeed(0); 
+     motors.setRightSpeed(0);
 }
 void slow()
 {
    motors.setLeftSpeed(200);
    motors.setRightSpeed(200);
-   delay(400);
+   delay(300);
 }
-
