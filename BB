@@ -4,8 +4,6 @@
 #include <ZumoMotors.h>
 #include <Pushbutton.h>
 #include <ZumoBuzzer.h>
-#include <avr/io.h>
-#include <avr/interrupt.h>
 ZumoBuzzer buzzer;
  
  
@@ -37,7 +35,7 @@ void setup() {
     delay(20);
   }
   motors.setSpeeds(0,0);
-  button.waitForButton();
+
   flag1 = 0;
   flag2 = 0;
   flag3 = 0;
@@ -107,14 +105,13 @@ void loop() {
       flag3 = 0;
       flag1=0;
       flag2 = 0;
-      count++;
-      if(count==1600000){
+      for(count=0;count<1000;count++)
+      {
      slowlinefollow();
       }
-     else{
+      stopm();
+      delay(2000);
     flag4=1; 
-     count=0;
-      }
       
      }
      
@@ -123,7 +120,7 @@ void loop() {
     
     
  void slowlinefollow(){
-const int SLOW_SPEED = 200;
+const int SLOW_SPEED = 150;
   unsigned int sensors[6];
   int position = reflectanceSensors.readLine(sensors);
   int error = position - 1000;
