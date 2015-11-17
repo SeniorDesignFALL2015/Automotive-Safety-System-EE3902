@@ -2,7 +2,7 @@
 #include <Average.h>
 
 #define SONAR_NUM     2 // Number or sensors.
-#define MAX_DISTANCE 200 // Max distance in cm.
+#define MAX_DISTANCE 100 // Max distance in cm.
 #define PING_INTERVAL 100 // Milliseconds between pings.
 bool flag = 0; 
 bool flag2 = 0;
@@ -59,16 +59,16 @@ void oneSensorCycle() { // Sensor ping cycle complete,
 avgping0= ave.mean();
 
 
-if( avgping0 <= 40  && avgping0 > 5 && cm[1] <= 15 && cm[1] > 2){
+if( avgping0 <= 50  && avgping0 > 5 && cm[1] <= 15 && cm[1] > 2){
    Serial.write(0xFF);
 }
-else if( avgping0 > 40 && cm[1] <= 15 && cm[1] > 2){
+else if( avgping0 > 50 && cm[1] <= 15 && cm[1] > 2){
    Serial.write(0x0C);
 }
-else if( avgping0 <= 40 && avgping0 > 5 && cm[1] > 15){
+else if( avgping0 <= 50 && avgping0 > 5 && cm[1] > 15){
    Serial.write(0xF0);
 }
-else if( avgping0 > 40  && cm[1] > 15){  
+else if( avgping0 > 50  && cm[1] > 15){  
   Serial.write(0x00);
 }
 }
