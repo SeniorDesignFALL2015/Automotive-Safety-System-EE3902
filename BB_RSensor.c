@@ -1,7 +1,7 @@
 #include <NewPing.h>
 #include <Average.h>
 
-#define SONAR_NUM     2 // Number or sensors.
+#define SONAR_NUM     3 // Number or sensors.
 #define MAX_DISTANCE 100 // Max distance in cm.
 #define PING_INTERVAL 100 // Milliseconds between pings.
 bool flag = 0; 
@@ -72,7 +72,7 @@ else if( avgping0 <= 50 && avgping0 > 5 && cm[1] > 15 && cm[2] > 12 ){
 else if( avgping0 > 50  && cm[1] > 15 && cm[2] > 12 ){  
   Serial.write(0x00);
 }
-
+//// SA ////
 else if( avgping0 <= 50  && avgping0 > 5 && cm[1] <= 15 && cm[1] > 2 && cm[2] <= 12 ){
    Serial.write(0xFF);
 }
