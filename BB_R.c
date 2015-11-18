@@ -7,13 +7,13 @@
 
 /// Misc ///
 ZumoBuzzer buzzer;
-unsigned long time;
+unsigned long time, x, y;
 /// Zumo Motor Code ///
 ZumoReflectanceSensorArray reflectanceSensors;
 ZumoMotors motors;
 Pushbutton button(ZUMO_BUTTON);
 int lastError = 0;
-const int MAX_SPEED = 400;
+const int MAX_SPEED = 300;
 /// Sensor Interfacing Code ///
 byte c;
 char flag1, flag2, flag3, flag4;
@@ -43,12 +43,15 @@ void setup() {
   flag3 = 0;
   flag4 = 1;
   count=0;
+  time=0;
  
 }
 /// Loop /// 
 void loop() {
   
-   //time = millis();
+   time = millis();
+   x= 16000UL;
+   y= 26000UL;
    
    while (Serial.available() ) {
       delay(10);  //small delay to allow input buffer to fill
@@ -61,7 +64,8 @@ void loop() {
 //     while (!Serial.available()) {
 //     }    
 
-       if(flag4==1){
+
+       if(flag4==1 && !(time>x && time<=y)){
        if (c == 0 && flag1 == 0 ){   // NF, NS and on right lane
           linefollow();  
           count=0;   
@@ -104,7 +108,7 @@ void loop() {
      linefollow();
      }
       }
-     else if(flag4==0 ){
+     else if(flag4==0 && !(time>x && time<=y) ){
        
       flag3 = 0;
       flag1=0;
@@ -117,16 +121,16 @@ void loop() {
       delay(1000);
     flag4=1; 
      }
-      else if(flag4==1 ){
-       while(1){
+      else if(flag4==1 && time>x && time<=y){
         stopm();
-       } 
+        //linefollow();
       }
-      else if(flag4==0 ){
-        while(1){
+      else if(flag4==0 && time>x && time<=y){
         stopm();
-       } 
+       //linefollow();
       }
+
+
 }
     
     
