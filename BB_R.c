@@ -7,7 +7,7 @@
 
 /// Misc ///
 ZumoBuzzer buzzer;
-unsigned long time, x, y;
+//unsigned long time;
 /// Zumo Motor Code ///
 ZumoReflectanceSensorArray reflectanceSensors;
 ZumoMotors motors;
@@ -43,29 +43,23 @@ void setup() {
   flag3 = 0;
   flag4 = 1;
   count=0;
-  time=0;
  
 }
 /// Loop /// 
 void loop() {
   
-   time = millis();
-   x= 16000UL;
-   y= 26000UL;
+   //time = millis();
    
    while (Serial.available() ) {
       delay(10);  //small delay to allow input buffer to fill
       c = Serial.read();  //gets one byte from serial buffer
       Serial.print(c);
      } 
-   while (Serial.available() ) {
-      c = 0xFF;
-     } 
+
 //     while (!Serial.available()) {
 //     }    
 
-
-       if(flag4==1 && !(time>x && time<=y)){
+       if(flag4==1){
        if (c == 0 && flag1 == 0 ){   // NF, NS and on right lane
           linefollow();  
           count=0;   
@@ -107,8 +101,8 @@ void loop() {
      else{
      linefollow();
      }
-      }
-     else if(flag4==0 && !(time>x && time<=y) ){
+     }
+    else if(flag4==0 ){
        
       flag3 = 0;
       flag1=0;
@@ -118,18 +112,9 @@ void loop() {
      slowlinefollow();
       }
       stopm();
-      delay(1000);
-    flag4=1; 
+      delay(500);
+       flag4=1; 
      }
-      else if(flag4==1 && time>x && time<=y){
-        stopm();
-        //linefollow();
-      }
-      else if(flag4==0 && time>x && time<=y){
-        stopm();
-       //linefollow();
-      }
-
 
 }
     
@@ -138,7 +123,7 @@ void loop() {
 const int SLOW_SPEED = 150;
   unsigned int sensors[6];
   int position = reflectanceSensors.readLine(sensors);
-  int error = position - 1000;
+  int error = position - 2500;
 int speedDifference = error / 4 + 6 * (error - lastError);
 lastError = error;
    int m1Speed = SLOW_SPEED + speedDifference;
